@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 431674307}
   - component: {fileID: 431674308}
   m_Layer: 0
-  m_Name: Hamgr with knife png
+  m_Name: Hamgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,9 +301,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 431674303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e750389e23730147b7a40675b6e0507, type: 3}
+  m_Script: {fileID: 11500000, guid: 4922a432cb46cdb4ab61e558e83aa95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpPower: 350.52
+  moveSpeed: 10.71
 --- !u!1 &506625845
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +368,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 28.13, y: 2.6}
+  m_Size: {x: 100.9, y: 2.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -379,8 +381,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506625845}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: -6.06, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.109999895, y: -6.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -395,7 +397,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 506625845}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7fe334986a4470b41b72432abc6623df, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -404,13 +406,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4.68, y: 2.6}
-    newSize: {x: 28.13, y: 2.6}
+    newSize: {x: 100.9, y: 2.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 28.11, y: 0.72}
+  m_Size: {x: 100.8, y: 0.72}
   m_EdgeRadius: 0
 --- !u!1 &519420028
 GameObject:
@@ -423,6 +425,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -438,6 +441,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f83e8c5f11ba6b468d6327929faa50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camHeight: -1.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -488,7 +504,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

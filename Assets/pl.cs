@@ -10,11 +10,14 @@ public class pl : MonoBehaviour
 
     Rigidbody2D rb;
 
+    SpriteRenderer sr;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
 
     }
 
@@ -29,11 +32,13 @@ public class pl : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             rb.velocity = new Vector3(moveSpeed, rb.velocity.y, 0);
+            sr.flipX = false;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             rb.velocity = new Vector3(-moveSpeed, rb.velocity.y, 0);
+            sr.flipX = true;
         }
     }
 }

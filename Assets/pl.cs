@@ -41,4 +41,20 @@ public class pl : MonoBehaviour
             sr.flipX = true;
         }
     }
+
+    private void OnCollisionEnter2D (Collision2D c)
+    {
+        if (c.gameObject.tag == "Platform")
+        {
+            transform.SetParent(c.transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D c)
+    {
+        if (c.gameObject.tag == "Platform")
+        {
+            transform.SetParent(null);
+        }
+    }
 }

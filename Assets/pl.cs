@@ -12,13 +12,15 @@ public class pl : MonoBehaviour
 
     SpriteRenderer sr;
 
+    Vector3 startPos;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
-
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -29,16 +31,26 @@ public class pl : MonoBehaviour
             rb.AddForce(transform.up * jumpPower);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             rb.velocity = new Vector3(moveSpeed, rb.velocity.y, 0);
             sr.flipX = false;
         }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+           
+        }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             rb.velocity = new Vector3(-moveSpeed, rb.velocity.y, 0);
             sr.flipX = true;
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+           
         }
     }
 
@@ -55,6 +67,11 @@ public class pl : MonoBehaviour
         if (c.gameObject.tag == "Platform")
         {
             transform.SetParent(null);
+        }
+        if (c.gameObject.tag == "Respawn")
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = startPos;
         }
     }
 }

@@ -8,11 +8,17 @@ public class pl : MonoBehaviour
 
     public float moveSpeed;
 
+    public float jumpDetectOffset;
+
+    public LayerMask jumpableObjects;
+
     Rigidbody2D rb;
 
     SpriteRenderer sr;
 
     Vector3 startPos;
+
+    BoxCollider2D bc;
 
 
     // Start is called before the first frame update
@@ -20,13 +26,14 @@ public class pl : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
+        bc = gameObject.GetComponent<BoxCollider2D>();
         startPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(transform.up * jumpPower);
         }
@@ -34,7 +41,7 @@ public class pl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             rb.velocity = new Vector3(moveSpeed, rb.velocity.y, 0);
-            sr.flipX = false;
+            sr.flipX = true;
         }
         if (Input.GetKeyUp(KeyCode.D))
         {
@@ -45,7 +52,7 @@ public class pl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             rb.velocity = new Vector3(-moveSpeed, rb.velocity.y, 0);
-            sr.flipX = true;
+            sr.flipX = false;
         }
         if (Input.GetKeyUp(KeyCode.A))
         {
@@ -54,11 +61,16 @@ public class pl : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D (Collision2D c)
+    private void OnCollisionEnter2D(Collision2D c)
     {
         if (c.gameObject.tag == "Platform")
         {
             transform.SetParent(c.transform);
+        }
+        if (c.gameObject.tag == "Respawn")
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = startPos;
         }
     }
 
@@ -68,10 +80,14 @@ public class pl : MonoBehaviour
         {
             transform.SetParent(null);
         }
-        if (c.gameObject.tag == "Respawn")
-        {
-            rb.velocity = Vector3.zero;
-            transform.position = startPos;
-        }
     }
+
+    private bool IsGrounded()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, jumpDetectOffset, jumpableObjects);
+            Color rayColor = Color.red;
+        Debug.DrawRay(bc.bounds.center - new Vector3(bc.bounds.extents.x, bc.bounds.extents.y + jumpDetectOffset), Vector2.right * bc.bounds.size.x, rayColor);
+        return raycastHit.collider != null;
+    }
+
 }
